@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="customersApp">
+<head>
+  <title>AngularJS Example.</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+  <div align="center">
+    <h1>Example of AngularJS.</h1>
+    <input type="text" placeholder="Enter anything you want..." ng-model="searchText" />
+  </div>
+  <div ng-controller="CustomersController">
+    <p><div class="huge-font">{{ searchText }}</div></p>
+    <table>
+      <tr ng-repeat="cust in customers | filter:searchText">
+        <td>{{ cust.name }}</td>
+        <td>{{ cust.total | currency }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="js/angular.js"></script>
+
+  <script>
+    var app = angular.module('customersApp', []);
+
+    // No, normally I don't put all my JS in one page.
+    // Normally, this would not be hard-coded like this haha. :-)
+    app.controller('CustomersController', function($scope) {
+      $scope.customers = [
+        {"id": 1, "name":"Brian", "total":5.99},
+        {"id": 2, "name":"Bee", "total":6.99},
+        {"id": 3, "name":"John", "total":8.99},
+        {"id": 4, "name":"Ron", "total":99.99},
+      ];
+    });
+  </script>
+
+</body>
+</html>
